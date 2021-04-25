@@ -17,11 +17,15 @@ routerApi.get('/productos', (req, res) => {
 
 routerApi.post('/productos', (req, res) => {
   const data = req.body;
+  data.price = parseFloat(data.price);
+  const newProduct = productos.postProducto({
+    title: data.title,
+    price: data.price,
+    thumbnail: data.thumbnail,
+  })
   if (data.form) {
-    delete data.form;
-    data.price = parseFloat(data.price);
+    return res.redirect("/productos/agregar")
   }
-  const newProduct = productos.postProducto(data)
   res.json(newProduct);
 })
 
@@ -43,4 +47,4 @@ routerApi.delete('/productos/:id', (req, res) => {
   res.json(deleteProduct);
 })
 
-export { routerApi };
+export { routerApi, productos };
