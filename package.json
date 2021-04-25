@@ -1,8 +1,8 @@
 {
   "type": "module",
-  "name": "entregable-9",
+  "name": "entregable-10",
   "version": "1.0.0",
-  "description": "Entregable clase 9",
+  "description": "Entregable clase 10",
   "main": "index.js",
   "scripts": {
     "start": "node ./src/index.js"
