@@ -3,16 +3,6 @@ import { routerApi, productos } from './RouterApi.js';
 
 const app = express();
 
-/* app.engine(
-  "hbs",
-  handlebars({
-    extname: "hbs",
-    defaultLayout: "layout.hbs",
-    layoutsDir: "./views",
-    partialsDir: "./views/partials",
-  })
-); */
-
 app.set("view engine", "ejs");
 
 app.use('/api', routerApi);
