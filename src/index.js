@@ -1,10 +1,9 @@
 import express from 'express';
-import handlebars from 'express-handlebars';
 import { routerApi, productos } from './RouterApi.js';
 
 const app = express();
 
-app.engine(
+/* app.engine(
   "hbs",
   handlebars({
     extname: "hbs",
@@ -12,22 +11,21 @@ app.engine(
     layoutsDir: "./views",
     partialsDir: "./views/partials",
   })
-);
+); */
 
-app.set("views", "./views");
-app.set("view engine", "hbs");
+app.set("view engine", "ejs");
 
 app.use('/api', routerApi);
 
 app.get('/productos/vista', (req, res) => {
   const data = productos.getProductos();
-  res.render("listProducts", {
+  res.render("pages/listProducts", {
     products: data
   });
 })
 
 app.get('/productos/agregar', (req, res) => {
-  res.render("addProduct");
+  res.render("pages/addProduct");
 })
 
 app.use(express.json());
