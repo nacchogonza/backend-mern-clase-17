@@ -23,10 +23,7 @@ routerApi.post('/productos', (req, res) => {
     price: data.price,
     thumbnail: data.thumbnail,
   })
-  if (data.form) {
-    return res.redirect("/productos/agregar")
-  }
-  res.json(newProduct);
+  // res.json(newProduct);
 })
 
 routerApi.get('/productos/:id', (req, res) => {
