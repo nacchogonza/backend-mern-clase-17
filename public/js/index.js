@@ -36,3 +36,33 @@ const addProduct = () => {
   socket.emit('new-product', producto);
   return false;
 }
+
+socket.on('messages', data => {
+  // console.log(data);
+  render(data);
+});
+
+function render(data) {
+    const html = data.map((elem, index) => {
+      return(`<div>
+            <span class="text-primary"><strong>${elem.author}</strong></span> <span style="color: brown;">${elem.date}</span>:
+            <em>${elem.text}</em>  </div>`)
+    }).join(" ");
+    document.getElementById('messages').innerHTML = html;
+}
+
+function addMessage(e) {
+    const time = new Date();
+
+    const mensaje = {
+      author: document.getElementById('username').value,
+      text: document.getElementById('texto').value,
+      date: `(${time.getDay()}/${time.getMonth()}/${time.getFullYear()}) ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
+    };
+    socket.emit('new-message', mensaje);
+
+    document.getElementById('texto').value = ''
+    document.getElementById('texto').focus()
+
+    return false;
+}

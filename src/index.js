@@ -7,6 +7,8 @@ const app = express();
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
 
+const messages = []
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -21,9 +23,16 @@ io.on('connection', socket => {
 
   socket.emit('productos', productos.getProductos())
 
+  socket.emit('messages', messages)
+
   socket.on('new-product', product => {
     productos.postProducto(product);
     io.sockets.emit('productos', productos.getProductos())
+  })
+
+  socket.on('new-message', data => {
+      messages.push(data)
+      io.sockets.emit('messages', messages)
   })
 })
 
