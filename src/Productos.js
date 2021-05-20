@@ -3,15 +3,18 @@ class Productos {
     this.productos = [];
   }
 
+  //listar
   getProductos () {
     return this.productos;
   }
 
+  // listar por id
   getProducto(id) {
     const product = this.productos.find((producto) => producto.id === parseInt(id))
     return product;
   }
 
+  // insertar producto
   postProducto (producto) {
     producto.id = this.productos.length + 1;
     this.productos.push(producto);

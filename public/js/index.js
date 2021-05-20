@@ -1,6 +1,8 @@
 const socket = io.connect();
 
 socket.on('productos', productos => {
+
+  console.log(productos);
   if (!productos.length) {
     htmlNoProducts = `
     <div style="overflow: hidden; box-sizing: border-box; text-align: center;">
@@ -38,8 +40,11 @@ const addProduct = () => {
 }
 
 socket.on('messages', data => {
-  // console.log(data);
-  render(data);
+  console.log('data messages: ', data);
+  if (data.length) {
+
+    render(data);
+  }
 });
 
 function render(data) {
@@ -52,6 +57,7 @@ function render(data) {
 }
 
 function addMessage(e) {
+    console.log('agregando msg');
     const time = new Date();
 
     const mensaje = {
@@ -59,6 +65,7 @@ function addMessage(e) {
       text: document.getElementById('texto').value,
       date: `(${time.getDay()}/${time.getMonth()}/${time.getFullYear()}) ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
     };
+    console.log(mensaje);
     socket.emit('new-message', mensaje);
 
     document.getElementById('texto').value = ''
